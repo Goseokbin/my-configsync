@@ -1,0 +1,7 @@
+roles: kube
+authToken: d3e0b4d0d617e1fc58a92bfe3d65bbfa
+proxyAddr: teleport.develop.matilda-mzc.com:443
+kubeClusterName: config-sync
+teleportVersionOverride: 11.3.8
+labels:
+   env: test 
