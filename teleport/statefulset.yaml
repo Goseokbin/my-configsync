@@ -1,0 +1,97 @@
+---
+# Source: teleport-kube-agent/templates/statefulset.yaml
+#
+# Warning to maintainers, any changes to this file that are not specific to the StatefulSet need to also be duplicated
+# in the deployment.yaml file.
+#
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: configsync-teleport
+  namespace: configsync-teleport
+  labels:
+    app: configsync-teleport
+spec:
+  serviceName: configsync-teleport
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configsync-teleport
+  template:
+    metadata:
+      annotations:
+        # ConfigMap checksum, to recreate the pod on config changes.
+        checksum/config: 02415412d3c8929069a1b4a4113d7004f4389e70321eeea7195083508f0aca61
+      labels:
+        app: configsync-teleport
+    spec:
+      securityContext:
+        fsGroup: 9807
+      serviceAccountName: configsync-teleport
+      containers:
+      - name: "teleport"
+        image: "public.ecr.aws/gravitational/teleport-distroless:11.3.8"
+        imagePullPolicy: IfNotPresent
+        env:
+          # This variable is set for telemetry purposes.
+          # Telemetry is opt-in and controlled at the auth level.
+          - name: TELEPORT_INSTALL_METHOD_HELM_KUBE_AGENT
+            value: "true"
+          - name: TELEPORT_REPLICA_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: KUBE_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: RELEASE_NAME
+            value: configsync-teleport
+        args:
+        - "--diag-addr=0.0.0.0:3000"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 9807
+        ports:
+        - name: diag
+          containerPort: 3000
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: diag
+          initialDelaySeconds: 5 # wait 5s for agent to start
+          periodSeconds: 5 # poll health every 5s
+          failureThreshold: 6 # consider agent unhealthy after 30s (6 * 5s)
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: diag
+          initialDelaySeconds: 5 # wait 5s for agent to register
+          periodSeconds: 5 # poll health every 5s
+          failureThreshold: 12 # consider agent unhealthy after 60s (12 * 5s)
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /etc/teleport
+          name: "config"
+          readOnly: true
+        - mountPath: /etc/teleport-secrets
+          name: "auth-token"
+          readOnly: true
+        - mountPath: /var/lib/teleport
+          name: "data"
+      volumes:
+      - name: "config"
+        configMap:
+          name: configsync-teleport
+      - name: "auth-token"
+        secret:
+          secretName: teleport-kube-agent-join-token
+      - name: "data"
+        emptyDir: {}

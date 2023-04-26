@@ -1,0 +1,64 @@
+---
+# Source: teleport-kube-agent/templates/psp.yaml
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: configsync-teleport
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
+    seccomp.security.alpha.kubernetes.io/defaultProfileName: 'runtime/default'
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+  - ALL
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: MustRunAs
+    ranges:
+    # Forbid adding the root group.
+    - min: 1
+      max: 65535
+  runAsUser:
+    rule: MustRunAsNonRoot
+  fsGroup:
+    rule: MustRunAs
+    ranges:
+    # Forbid adding the root group.
+    - min: 1
+      max: 65535
+  readOnlyRootFilesystem: true
+  volumes:
+  - '*'
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+---
+# Source: teleport-kube-agent/templates/psp.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: configsync-teleport-psp
+rules:
+- apiGroups:
+  - policy
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+  resourceNames:
+  - configsync-teleport
+---
+# Source: teleport-kube-agent/templates/psp.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: configsync-teleport-psp
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: configsync-teleport-psp
+subjects:
+- kind: ServiceAccount
+  name: configsync-teleport
