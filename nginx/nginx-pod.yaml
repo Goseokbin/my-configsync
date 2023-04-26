@@ -11,4 +11,3 @@ spec:
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
-status: {}
