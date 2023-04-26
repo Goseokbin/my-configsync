@@ -70,7 +70,7 @@ spec:
                 fieldPath: metadata.namespace
           - name: RELEASE_NAME
             value: configsync-teleport
-        image: "public.ecr.aws/gravitational/teleport-distroless:11.3.8"
+        image: "public.ecr.aws/gravitational/teleport-distroless:14.0.0-dev"
         imagePullPolicy: IfNotPresent
         command: ["teleport"]
         args: ["kube-state", "delete"]

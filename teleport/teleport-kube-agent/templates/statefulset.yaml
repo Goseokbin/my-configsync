@@ -30,7 +30,7 @@ spec:
       serviceAccountName: configsync-teleport
       containers:
       - name: "teleport"
-        image: "public.ecr.aws/gravitational/teleport-distroless:11.3.8"
+        image: "public.ecr.aws/gravitational/teleport-distroless:14.0.0-dev"
         imagePullPolicy: IfNotPresent
         env:
           # This variable is set for telemetry purposes.
