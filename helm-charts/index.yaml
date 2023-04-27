@@ -3,7 +3,7 @@ entries:
   mariadb:
   - apiVersion: v1
     appVersion: 10.3.22
-    created: "2023-04-27T17:03:37.343397+09:00"
+    created: "2023-04-27T17:11:00.978588+09:00"
     deprecated: true
     description: DEPRECATED Fast, reliable, scalable, and easy to use open-source
       relational database system. MariaDB Server is intended for mission-critical,
@@ -28,7 +28,7 @@ entries:
   teleport-kube-agent:
   - apiVersion: v2
     appVersion: 12.2.4
-    created: "2023-04-27T17:03:37.346886+09:00"
+    created: "2023-04-27T17:11:00.982152+09:00"
     description: Teleport provides a secure SSH, Kubernetes, database and application
       remote access solution that doesn't get in the way.
     digest: b217fdcd03fe9829d9e615f80120b38391395e3e0141bcde525449660550bdf3
@@ -39,4 +39,4 @@ entries:
     urls:
     - https://goseokbin.github.io/my-configsync/helm-charts/teleport-kube-agent-12.2.4.tgz
     version: 12.2.4
-generated: "2023-04-27T17:03:37.339198+09:00"
+generated: "2023-04-27T17:11:00.974782+09:00"
