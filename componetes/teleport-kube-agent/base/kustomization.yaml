@@ -1,5 +1,5 @@
 helmCharts:
-- name: teleport-agent 
+- name: teleport-kube-agent 
   repo: https://goseokbin.github.io/my-configsync/helm-charts 
   releaseName: teleport-agent 
   namespace: teleport-agent-v2 
