@@ -1,0 +1,6 @@
+chartmuseum:
+  replicas: "3"
+core:
+  replicas: "3"
+proxy:
+  noProxy: 127.0.0.1

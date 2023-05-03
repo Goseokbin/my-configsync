@@ -1,0 +1,10 @@
+resources:  
+- ../base
+patches:
+- target:
+    kind: Ingress
+    name: kube-prometheus-stack-grafana 
+  patch: |-
+    - op : replace
+      path: /spec/rules/0/host
+      value: monitoring.dev.matilda-mzc.com
