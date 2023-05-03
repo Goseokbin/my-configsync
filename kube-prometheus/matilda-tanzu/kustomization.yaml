@@ -11,4 +11,4 @@ helmCharts:
       ingress:
       hosts:
       - monitoring.tanzu.matilda-mzc.com 
-  valuesMerge: merge
+  valuesMerge: replace
