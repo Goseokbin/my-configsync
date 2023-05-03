@@ -1,0 +1,13 @@
+bases:
+  - ../base
+helmCharts:
+- name: kube-prometheus-stack 
+  repo: https://prometheus-community.github.io/helm-charts 
+  version: v45.23.0
+  releaseName: kube-prometheus-stack 
+  namespace: monitoring
+  valueInline:
+    grafana:
+      ingress:
+      hosts:
+      - monitoring.tanzu.matilda-mzc.com 
