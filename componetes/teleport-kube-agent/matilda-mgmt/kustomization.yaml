@@ -1,10 +1,6 @@
-resources:  
-- ../base
-patches:
-- target:
-    kind: Ingress
-    name: kube-prometheus-stack-grafana 
-  patch: |-
-    - op : replace
-      path: /spec/rules/0/host
-      value: monitoring.tanzu.matilda-mzc.com
+helmCharts:
+- name: teleport-kube-agent 
+  repo: https://goseokbin.github.io/my-configsync/helm-charts 
+  releaseName: teleport-agent 
+  namespace: teleport-agent-v2 
+  valuesFile: values.yaml

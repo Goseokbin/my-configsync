@@ -1,0 +1,5 @@
+roles: kube
+authToken: 42e4a13ae2460266e68819194fa5c755
+proxyAddr: teleport.develop.matilda-mzc.com:443
+kubeClusterName: teleport-agent-v2
+
