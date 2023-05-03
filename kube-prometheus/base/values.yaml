@@ -1,8 +1,16 @@
-apiVersion: builtin
-kind: HelmChartInflationGenerator
-metadata:
-  name: kube-promethues 
-releaseName: kube-prometheus 
-name: kube-prometheus 
-version: 45.23.0 
-repo: https://prometheus-community.github.io/helm-charts 
+#apiVersion: builtin
+#kind: HelmChartInflationGenerator
+#metadata:
+#  name: kube-promethues 
+#releaseName: kube-prometheus 
+#name: kube-prometheus 
+#version: 45.23.0 
+#repo: https://prometheus-community.github.io/helm-charts 
+
+grafana:
+  adminPassword: megazone00!
+  ingress:
+    enabled: true
+    hosts:
+    - monitoring.mgmt.matilda-mzc.com
+
