@@ -7,6 +7,8 @@ helmCharts:
   releaseName: kube-prometheus-stack 
   namespace: monitoring
   valuesFile: values.yaml
+  includeCRDs: true
+  valuesMerge: merge
   #valuesInline:
   #  grafana:
   #    ingress:
