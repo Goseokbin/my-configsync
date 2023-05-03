@@ -1,0 +1,16 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:
+  name: nginx-kustomization-rootsync 
+  namespace: config-management-system
+spec:
+  sourceType: git
+  sourceFormat: unstructured 
+  git:
+    repo: https://github.com/Goseokbin/my-configsync.git 
+    branch: main
+    dir: nginx-kustomize/overlay/n3 
+    auth: token
+    secretRef:
+      name: github-token 
+     # name: ROOT_CA_CERT_SECRET_NAME

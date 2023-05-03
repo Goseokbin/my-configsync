@@ -1,0 +1,18 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:
+  name: cert-manager-rootsync 
+  namespace: config-management-system
+spec:
+  sourceType: git
+  sourceFormat: unstructured 
+  git:
+    repo: https://github.com/Goseokbin/my-configsync.git 
+    branch: main
+    dir: cert-manager 
+    auth: token
+    secretRef:
+      name: github-token 
+    #noSSLVerify: ROOT_NO_SSL_VERIFY
+    #caCertSecretRef:
+     # name: ROOT_CA_CERT_SECRET_NAME

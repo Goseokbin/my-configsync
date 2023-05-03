@@ -1,0 +1,15 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:
+  name: harbor-rootsync 
+  namespace: config-management-system
+spec:
+  sourceType: git
+  sourceFormat: unstructured 
+  git:
+    repo: https://github.com/Goseokbin/my-configsync.git 
+    branch: main
+    dir: harbor/base
+    auth: token
+    secretRef:
+      name: github-token 
