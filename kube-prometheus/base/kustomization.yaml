@@ -5,7 +5,7 @@
 helmCharts:
 - name: kube-prometheus 
   repo: https://prometheus-community.github.io/helm-charts 
-  version: v45.23.0
+  version: 45.23.0
   releaseName: kube-prometheus-stack 
   namespace: monitoring
   valuesFile: values.yaml
