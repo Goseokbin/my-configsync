@@ -6,7 +6,7 @@ helmCharts:
   version: v45.23.0
   releaseName: kube-prometheus-stack 
   namespace: monitoring
-  valueInline:
+  valuesInline:
     grafana:
       ingress:
       hosts:
