@@ -6,5 +6,5 @@ patches:
     name: kube-prometheus-stack-grafana 
   patch: |-
     - op : replace
-      path: /spec/rules/hosts
+      path: /spec/rules/0/hosts
       value: monitoring.tanzu.matilda-mzc.com
