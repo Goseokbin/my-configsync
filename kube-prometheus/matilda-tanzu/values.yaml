@@ -1,0 +1,6 @@
+grafana:
+  ingress:
+    enabled: true
+    hosts:
+    - monitoring.tanzu.matilda-mzc.com
+

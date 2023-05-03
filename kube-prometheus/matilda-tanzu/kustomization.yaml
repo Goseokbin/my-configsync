@@ -6,9 +6,10 @@ helmCharts:
   version: v45.23.0
   releaseName: kube-prometheus-stack 
   namespace: monitoring
-  valuesInline:
-    grafana:
-      ingress:
-      hosts:
-      - monitoring.tanzu.matilda-mzc.com 
-  valuesMerge: replace
+  valuesFile: values.yaml
+  #valuesInline:
+  #  grafana:
+  #    ingress:
+  #    hosts:
+  #    - monitoring.tanzu.matilda-mzc.com 
+  #valuesMerge: replace
