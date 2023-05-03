@@ -3,9 +3,9 @@
 #resources:
 #  - values.yaml
 helmCharts:
-- name: kube-prometheus 
+- name: kube-prometheus-stack 
   repo: https://prometheus-community.github.io/helm-charts 
-  version: 45.23.0
+  version: v45.23.0
   releaseName: kube-prometheus-stack 
   namespace: monitoring
   valuesFile: values.yaml
